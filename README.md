@@ -29,6 +29,7 @@ Shellgen: https://github.com/Leo4j/ShellGen
 # Usage
 ```powershell
 # Load into memory and execute
+IEX(New-Object System.Net.WebClient).DownloadString("")
 
 ```
 ## Output
