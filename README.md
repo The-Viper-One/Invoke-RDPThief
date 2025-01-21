@@ -4,7 +4,8 @@ This PowerShell script runs on a loop hunting for mstsc.exe processes. When any 
 
 RDPThief.dll was converted to shellcode with Donut, then converted to UUIDs with Shellgen to hide the shellcode in plainsight within the script. The UUIDs are then converted back into shellcode at runtime and injected whilst staying completley in memory.
 
-Works against Defender as of 01/10/2024
+- Works against Defender as of 01/10/2024
+- Requires Administrative rights
 
 ## Usage
 ```powershell
